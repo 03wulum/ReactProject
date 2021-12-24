@@ -4,7 +4,7 @@ import Tasks from "./component/Tasks";
 import AddTask from "./component/AddTask";
 
 const App = () => {
-
+  const [showAddTask, setShowAddTask] = useState(false)
   const [tasks, setTask] = useState([
     {
       id: 1,
@@ -26,6 +26,18 @@ const App = () => {
     },
   ])
 
+  // Add Task
+  const addTask = (task) => {
+    // add to state
+    // create your own id, if not using server
+
+    const id = Math.floor(Math.random() * 1000) + 1
+
+    // this takes the values from the input (task) and adds it to the object with an id
+    const newTask = {id, ...task}
+    // this adds newTask into the existing state
+    setTask([...tasks, newTask])
+  }
   // since we don't have a store, we can just pass the function
   // down to the grandchild, task.js
   // Delete Task
@@ -42,8 +54,10 @@ const App = () => {
   // const name = 'Brad'
   return (
     <div className="container">
-      <Header title="1"/>
-      <AddTask/>
+      <Header onAdd={() => setShowAddTask(!showAddTask)} 
+      title="1" showAdd={showAddTask}/>
+      {/* shorter way of doing a ternary */}
+     { showAddTask && <AddTask onAdd={addTask}/> }
      {tasks.length > 0 ? <Tasks tasks={tasks} 
      onToggle={toggleReminder}
      onDelete={deleteTask}/> : "No Tasks to show"}
