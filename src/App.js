@@ -1,11 +1,32 @@
 import Header from "./component/Header";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Tasks from "./component/Tasks";
 import AddTask from "./component/AddTask";
 
 const App = () => {
-  const [showAddTask, setShowAddTask] = useState(false)
-  const [tasks, setTask] = useState([])
+  const [showAddTask, setShowAddTask] = useState(false);
+  const [tasks, setTask] = useState([]);
+
+  // do something when the page loads
+  useEffect(() => {
+    const getTasks = async () => {
+      // fetch returns a promise
+      const tasksFromServer = await fetchTasks();
+      setTask(tasksFromServer)
+    }
+    //call it
+    getTasks();
+  }, 
+  //dependency array, value that changes triggering a run would be passed hereE
+  [])
+
+  const fetchTasks = async () => {
+    // fetch returns a promise
+    const res = await fetch('http://localhost:5000/tasks');
+    const data = await res.json();
+
+    return data;
+  }
 
   // Add Task
   const addTask = (task) => {
@@ -24,6 +45,7 @@ const App = () => {
   // Delete Task
   const deleteTask = (id) => {
     // console.log('delete', id);
+    
     setTask(tasks.filter((task) => task.id !== id))
   }
   // Toggle Reminder
