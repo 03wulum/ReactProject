@@ -1,7 +1,10 @@
 import Header from "./component/Header";
+import  { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import Footer from "./component/Footer";
 import { useState, useEffect } from "react";
 import Tasks from "./component/Tasks";
 import AddTask from "./component/AddTask";
+import About from "./component/About";
 
 const App = () => {
   const [showAddTask, setShowAddTask] = useState(false);
@@ -88,18 +91,27 @@ const App = () => {
 
   // const name = 'Brad'
   return (
+    <Router>
+   
     <div className="container">
       <Header onAdd={() => setShowAddTask(!showAddTask)} 
       title="1" showAdd={showAddTask}/>
       {/* shorter way of doing a ternary */}
-     { showAddTask && <AddTask onAdd={addTask}/> }
+     <Routes>
+     <Route path="/" element={  
+     <> 
+       { showAddTask && <AddTask onAdd={addTask}/> }
      {tasks.length > 0 ? <Tasks tasks={tasks} 
      onToggle={toggleReminder}
      onDelete={deleteTask}/> : "No Tasks to show"}
-   
+       </>
+      }
+      />
+     <Route path="/about" element={<About/>} /></Routes>
+      <Footer/>
       {/* <h1 style={{color:"Red", backgroundColor:"black"}}>Hello from React</h1> */}
       {/* <h1>Hello i'm {name}</h1> */}
-    </div>
+    </div></Router>
   );
 }
 
