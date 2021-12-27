@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import Tasks from "./component/Tasks";
 import AddTask from "./component/AddTask";
 import About from "./component/About";
+import TaskDetails from "./component/TaskDetails";
 
 const App = () => {
   const [showAddTask, setShowAddTask] = useState(false);
@@ -98,6 +99,8 @@ const App = () => {
       title="1" showAdd={showAddTask}/>
       {/* shorter way of doing a ternary */}
      <Routes>
+       //USE ELEMENT INSTEAD OF COMPONENT IN router v6
+       // routes must wrap route
      <Route path="/" element={  
      <> 
        { showAddTask && <AddTask onAdd={addTask}/> }
@@ -107,7 +110,8 @@ const App = () => {
        </>
       }
       />
-     <Route path="/about" element={<About/>} /></Routes>
+     <Route path="/about" element={<About/>} />
+     <Route path="/task/:id" element={<TaskDetails/>} /></Routes>
       <Footer/>
       {/* <h1 style={{color:"Red", backgroundColor:"black"}}>Hello from React</h1> */}
       {/* <h1>Hello i'm {name}</h1> */}
