@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 
 function TaskDetails() {
   const [loading, setLoading] = useState(true);
@@ -18,7 +18,19 @@ function TaskDetails() {
     };
     fetchTask();
   });
-    return <div></div>;
+
+  if (error) {
+    return <navigate to="/" />;
+  }
+
+  return loading ? (
+    <h3>Loading...</h3>
+  ) : (
+    <div>
+      <h3>{task.text}</h3>
+      <p>{task.day}</p>
+    </div>
+  );
 }
 
 export default TaskDetails;
