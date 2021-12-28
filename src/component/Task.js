@@ -1,9 +1,10 @@
 import { FaTimes } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Task = ({ task, onDelete, onToggle }) => {
   return (
     <div
-      className={`task ${task.reminder ? 'reminder' : ''}`}
+      className={`task ${task.reminder ? "reminder" : ""}`}
       onDoubleClick={() => onToggle(task.id)}
     >
       <h3>
@@ -14,6 +15,9 @@ const Task = ({ task, onDelete, onToggle }) => {
         />
       </h3>
       <p>{task.day}</p>
+      <p>
+        <Link to={`/task/${task.id}`}>View Details</Link>
+      </p>
     </div>
   );
 };
