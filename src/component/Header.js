@@ -17,7 +17,6 @@ const Header = ({ title, onAdd, showAdd }) => {
           onClick={onAdd}
         />
       )}
-      {/* <h1 style={headingStyle}>Hello from React</h1> */}
     </header>
   );
 };

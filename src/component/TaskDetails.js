@@ -18,7 +18,7 @@ function TaskDetails() {
       setTask(data);
       setLoading(false);
       if (res.status === 404) {
-        navigate("/");
+        navigate("/NotFound");
       }
     };
 

@@ -6,6 +6,7 @@ import Tasks from "./component/Tasks";
 import AddTask from "./component/AddTask";
 import About from "./component/About";
 import TaskDetails from "./component/TaskDetails";
+import NotFound from "./component/NotFound";
 
 const App = () => {
   const [showAddTask, setShowAddTask] = useState(false);
@@ -96,7 +97,7 @@ const App = () => {
    
     <div className="container">
       <Header onAdd={() => setShowAddTask(!showAddTask)} 
-      title="1" showAdd={showAddTask}/>
+      title="1.0" showAdd={showAddTask}/>
       {/* shorter way of doing a ternary */}
      <Routes>
        //USE ELEMENT INSTEAD OF COMPONENT IN router v6
@@ -111,6 +112,7 @@ const App = () => {
       }
       />
      <Route path="/about" element={<About/>} />
+     <Route path="/NotFound" element={<NotFound/>} />
      <Route path="/task/:id" element={<TaskDetails/>} /></Routes>
       <Footer/>
       {/* <h1 style={{color:"Red", backgroundColor:"black"}}>Hello from React</h1> */}
